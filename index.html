@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Para Sami con Amor 🌹</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #f48fb1;
+    overflow: hidden;
+    user-select: none;
+  }
+  .heart {
+    font-size: 180px;
+    cursor: pointer;
+    color: #ff2e63;
+    animation: heartbeat 1.5s infinite;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
+  .heart:hover, .heart:active {
+    animation-play-state: paused;
+    transform: scale(1.3);
+    color: #ff1a52;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+  .message {
+    margin-top: 20px;
+    font-size: 1.8rem;
+    max-width: 400px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.4;
+    text-shadow: 0 0 8px #ff2e63;
+  }
+  .name {
+    font-weight: 900;
+    color: #ff3d7f;
+    text-shadow: 0 0 15px #ff3d7f;
+  }
+  .flower {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ff6f91" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a1 1 0 0 1 .832.445l1.993 2.99 3.28.47a1 1 0 0 1 .56 1.71l-2.37 2.31.56 3.28a1 1 0 0 1-1.45 1.05L12 12.54l-2.92 1.53a1 1 0 0 1-1.45-1.05l.56-3.28-2.37-2.31a1 1 0 0 1 .56-1.71l3.28-.47 1.993-2.99A1 1 0 0 1 12 2z"/></svg>');
+    background-size: contain;
+    pointer-events: none;
+    opacity: 1;
+    animation: floatUp 1.8s forwards ease-out;
+    filter: drop-shadow(0 0 2px #ff6f91);
+  }
+  @keyframes floatUp {
+    to {
+      transform: translateY(-100px) translateX(30px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="heart" role="img" aria-label="corazón interactivo">❤️</div>
+<div class="message">
+  Sami, tú eres el latido más fuerte de mi corazón.<br />
+  Aunque la distancia exista, tú vives en cada rincón de mí.<br />
+  <span class="name">💖 Siempre contigo. 💖</span>
+</div>
+
+<script>
+  const heart = document.querySelector('.heart');
+
+  heart.addEventListener('click', (e) => {
+    for(let i = 0; i < 10; i++) {
+      createFlower(e.clientX, e.clientY);
+    }
+  });
+
+  function createFlower(x, y) {
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+
+    // Posición inicial cerca del clic
+    flower.style.left = (x + (Math.random()*40 - 20)) + 'px';
+    flower.style.top = (y + (Math.random()*40 - 20)) + 'px';
+
+    // Animación con diferente dirección y duración
+    flower.style.animationDuration = (1.5 + Math.random()) + 's';
+    flower.style.animationName = 'floatUp';
+
+    document.body.appendChild(flower);
+
+    // Remover el elemento luego de la animación
+    flower.addEventListener('animationend', () => {
+      flower.remove();
+    });
+  }
+</script>
+
+</body>
+</html>
